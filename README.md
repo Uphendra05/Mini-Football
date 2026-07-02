@@ -31,21 +31,23 @@ Built as a technical prototype to demonstrate multiplayer systems design, UE5 Ga
 ### Enhanced Input & Shoot RPC
 When the player triggers `IA_Shoot` and is in range, a Server RPC (`ServerKickBall`) is called — ensuring the kick is always validated and executed on the server before being reflected to clients.
 
-![Enhanced Input and Server Kick RPC](screenshots/01_input_shoot_rpc.png)
+<img width="756" height="235" alt="image" src="https://github.com/user-attachments/assets/cee50ea1-a099-4938-9b56-1a42a2eb0b7b" />
+
 
 ---
 
 ### Input Mappings
 Full input action mappings for `IA_Jump`, `IA_Move`, `IA_Look`, and `IA_Shoot` — supporting both keyboard/mouse and gamepad via the Enhanced Input System.
 
-![Input Mappings](screenshots/02_input_mappings.png)
+<img width="596" height="806" alt="image" src="https://github.com/user-attachments/assets/66be3cad-c296-4320-94e2-20319248a5b9" />
 
 ---
 
 ### Out of Bounds — Component-Based Respawn
 When the ball or a player enters an out-of-bounds volume, a Sequence node triggers both `AC_BallRespawnComponent` and `AC_PlayerRespawnComponent` — reusable Actor Components that handle respawn logic independently and can be attached to any future actor.
 
-![Out of Bounds Respawn Logic](screenshots/03_out_of_bounds_respawn.png)
+<img width="914" height="582" alt="image" src="https://github.com/user-attachments/assets/6b84a990-6616-41bd-8d2a-58c5e65c56b7" />
+
 
 ---
 
@@ -56,21 +58,24 @@ Four Multicast RPCs handle all goal-related events so every client sees the same
 - `Multicast_TriggerAnimation` — moves the goal mesh on the Z axis
 - `Multicast_GoalCelebration` — plays the goal celebration after a 1-second delay
 
-![Remote Procedure Calls](screenshots/04_rpc_goal_events.png)
+<img width="1067" height="333" alt="image" src="https://github.com/user-attachments/assets/80297fb7-4121-4f84-9a50-675b801593af" />
+
 
 ---
 
 ### Goal Scored Flow
 The full goal-scored sequence on the server: celebration multicast → goal colour change multicast → goal move multicast → server handles ball respawn. Random colour values are generated once on the server and multicasted to all clients — avoiding desync from independent random calls per machine.
 
-![Goal Scored Server Flow](screenshots/05_goal_scored_flow.png)
+<img width="639" height="817" alt="image" src="https://github.com/user-attachments/assets/423a330d-2fcd-4dfc-9549-b6bdaf04008a" />
+
 
 ---
 
 ### Player Spawn Logic
 `ChoosePlayerStart` is overridden in the GameMode to find all `PlayerStart` actors by tag, use the current player count from GameState's player array length, and deterministically assign a start position using `GET` — ensuring players always spawn on the correct side without manual placement logic.
 
-![Choose Player Spawn](screenshots/06_choose_player_spawn.png)
+<img width="895" height="555" alt="image" src="https://github.com/user-attachments/assets/34b357b1-e2d0-4b13-8aeb-2f8b23fe024f" />
+
 
 ---
 
